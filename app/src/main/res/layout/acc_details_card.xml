@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:background="#f1f1f2"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="12dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+
+            <com.jimahtech.banking.font.RobotoTextView
+                android:id="@+id/trans_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="#878788"
+                android:textSize="20sp"
+                android:padding="1dp"
+                app:typeface="robotoRegular"/>
+
+            <com.jimahtech.banking.font.RobotoTextView
+                android:id="@+id/trans_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:textColor="#333334"
+                android:textSize="18sp"
+                android:text="Desc"
+                app:typeface="robotoLight" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+            <com.jimahtech.banking.font.RobotoTextView
+                android:id="@+id/trans_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:textSize="16sp"
+                android:text="00.0"
+                android:textColor="@color/colorPrimary"
+                app:typeface="robotoBoldCondensed"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

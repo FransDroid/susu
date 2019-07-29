@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jimahtech.banking">
+
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activities.bank.BankReceiptActivity"></activity>
+        <activity android:name=".activities.agents.DailyReceiptActivity" />
+        <activity android:name=".activities.agents.DialyPaymentActivty" />
+        <activity android:name=".activities.bank.GrantLoadActivity" />
+        <activity android:name=".activities.bank.UpdateAgentActivity" />
+        <activity android:name=".activities.bank.BankRegisterAgent" />
+        <activity android:name=".activities.bank.NewAgentAgent" />
+        <activity android:name=".activities.customer.BonusActivity" />
+        <activity android:name=".activities.customer.StatementActivity" />
+        <activity android:name=".activities.customer.LoanActivity" />
+        <activity android:name=".activities.customer.BalanceActivity" />
+        <activity android:name=".activities.agents.NewCustomerActivity" />
+        <activity android:name=".activities.TransactionActivity" />
+        <activity android:name=".activities.ViewTransferActivity" />
+        <activity android:name=".activities.customer.WithdrawActivity" />
+        <activity android:name=".activities.customer.DepositActivity" />
+        <activity android:name=".activities.SendMoneyActivity" />
+        <activity android:name=".activities.WelcomeActivity" />
+        <activity
+            android:name=".activities.ActivitySignIn"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name" />
+        <activity android:name=".activities.ActivityAcccountDetails">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jimahtech.banking.activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.ActivityTransfer">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jimahtech.banking.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".activities.MainActivity" />
+    </application>
+
+</manifest>

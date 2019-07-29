@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_page"
+        android:title="Accounts" />
+    
+    <item
+        android:id="@+id/action_transfer"
+        android:title="Transfers"
+        />
+    <item
+        android:id="@+id/action_setting"
+        android:title="Setting"
+        />
+
+</menu>
