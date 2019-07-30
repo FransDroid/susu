@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         progressDialog.dismiss();
                                         try {
                                             boolean Success = response.getBoolean("Success");
-                                            if (Success && response.getString("AccountNumber").isEmpty()) {
+                                            if (Success) {
                                                 dialog.dismiss();
                                                 progressDialog.dismiss();
                                                     final Dialog dialog1 = new Dialog(MainActivity.this);
@@ -155,11 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                         }
                                                     });
                                                     dialog1.show();
-                                            }else{
-                                                progressDialog.dismiss();
-                                                Toast.makeText(getApplicationContext(), "Sorry, Accounts Number Not Found!!", Toast.LENGTH_LONG).show();
                                             }
-
                                         } catch (Exception e) {
                                             progressDialog.dismiss();
                                             if(Config.isDebug)System.out.println(e.toString());

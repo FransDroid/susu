@@ -443,7 +443,13 @@ public class NewCustomerActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        final String imageString = Config.imageToBase64(bitmap);
+        final String imageString;
+        if(bitmap == null){
+            Bitmap bmp = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+            imageString = Config.imageToBase64(bmp);
+        }else {
+            imageString = Config.imageToBase64(bitmap);
+        }
 
         if(Config.isDebug)System.out.println("URL: " + url);
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,

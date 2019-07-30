@@ -18,12 +18,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.jimahtech.banking.Config.Config;
 import com.jimahtech.banking.R;
 import com.jimahtech.banking.manager.PrefManager;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class WithdrawActivity extends AppCompatActivity {
     Button send;
@@ -35,7 +39,7 @@ public class WithdrawActivity extends AppCompatActivity {
     boolean cancel = false;
     String network;
 
-    String[] data = {"Aitel Money", "MTN Mobile Money", "Tigo Cash", "Vodafone Cash"};
+    String[] data = {"MTN Mobile Money", "Tigo Cash", "Vodafone Cash","Airtel Money"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +144,63 @@ public class WithdrawActivity extends AppCompatActivity {
     }
 
     private void withdrawMoney(String id, String amt, String dec,String network,String fone) {
+        final String url = Config.API_URL + "Apis.php?func=customerWithdraw";
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage("Processing Transaction,  Please Wait!!!");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        if(Config.isDebug)System.out.println("URL: " + url);
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            System.out.println("URL:" + response);
+                            JSONObject obj = new JSONObject(String.valueOf(response));
+                            boolean success = obj.getBoolean("Success");
+                            String msg = obj.getString("msg");
+                            if (success) {
+                                progressDialog.dismiss();
+                                if(Config.isDebug)System.out.println("ERROE" + response);
+                                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                                ClearEntry();
+                                //Config.sendSMS("Dear Customer a payment of GHS "+ amt+" has been successfully deposited into you account","Susu Mobile","00233246275242");
+                            } else {
+                                progressDialog.dismiss();
+                                if(Config.isDebug)System.out.println("ERROE" + response);
+                                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            progressDialog.dismiss();
+                            if(Config.isDebug)System.out.println(e.toString());
+                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", id);
+                params.put("amt", amt);
+                params.put("desc", dec);
+                params.put("phone", fone);
+                params.put("type", network);
+                return params;
+            }
+        };
+        requestQueue.add(postRequest);
+    }
+   /* private void withdrawMoney(String id, String amt, String dec,String network,String fone) {
         final String url = Config.API_URL + "deposit.php?id="+id+"&amt="+amt+"&desc="+dec+"&phone="+fone+"&type="+network;
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Processing Transaction,  Please Wait!!!");
@@ -179,6 +240,6 @@ public class WithdrawActivity extends AppCompatActivity {
         });
 
         requestQueue.add(sendRequest);
-    }
+    }*/
 }
 
